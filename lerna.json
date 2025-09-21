@@ -1,0 +1,26 @@
+{
+  "version": "independent",
+  "npmClient": "npm",
+  "packages": [
+    "services/*",
+    "shared/*"
+  ],
+  "command": {
+    "publish": {
+      "conventionalCommits": true,
+      "message": "chore(release): publish",
+      "registry": "https://npm.pkg.github.com",
+      "allowBranch": [
+        "main",
+        "release/*"
+      ]
+    },
+    "version": {
+      "allowBranch": [
+        "main",
+        "release/*"
+      ],
+      "conventionalCommits": true
+    }
+  }
+}
