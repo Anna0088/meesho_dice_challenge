@@ -1,0 +1,74 @@
+name: Deploy to Production
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+env:
+  KUBERNETES_VERSION: 1.28
+  DOCKER_REGISTRY: ghcr.io
+
+jobs:
+  deploy:
+    name: Deploy to Kubernetes
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup kubectl
+        uses: azure/setup-kubectl@v3
+        with:
+          version: ${{ env.KUBERNETES_VERSION }}
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Update kubeconfig
+        run: |
+          aws eks update-kubeconfig --name meesho-cluster --region ${{ secrets.AWS_REGION }}
+
+      - name: Deploy to Kubernetes
+        run: |
+          # Update image tags in deployment files
+          for service in seller-service review-service loyalty-service analytics-service gateway; do
+            kubectl set image deployment/$service $service=${{ env.DOCKER_REGISTRY }}/${{ github.repository }}/$service:${{ github.ref_name }} -n meesho-ecosystem
+          done
+
+          # Wait for rollout to complete
+          for service in seller-service review-service loyalty-service analytics-service gateway; do
+            kubectl rollout status deployment/$service -n meesho-ecosystem --timeout=10m
+          done
+
+      - name: Run smoke tests
+        run: |
+          # Test health endpoints
+          for service in seller-service review-service loyalty-service analytics-service gateway; do
+            kubectl exec -n meesho-ecosystem deployment/$service -- curl -f http://localhost:3000/health || exit 1
+          done
+
+      - name: Notify deployment
+        uses: slackapi/slack-github-action@v1.24.0
+        with:
+          payload: |
+            {
+              "text": "Deployment to production completed successfully",
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "*Deployment Status:* ✅ Success\n*Version:* ${{ github.ref_name }}\n*Environment:* Production\n*Triggered by:* ${{ github.actor }}"
+                  }
+                }
+              ]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}

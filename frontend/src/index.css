@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-primary: 16 185 129;
+    --color-secondary: 14 165 233;
+    --color-success: 34 197 94;
+    --color-warning: 245 158 11;
+    --color-danger: 239 68 68;
+  }
+
+  body {
+    @apply antialiased;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply px-6 py-3 bg-green-primary text-white font-semibold rounded-lg hover:bg-leaf-green transition-colors duration-200 shadow-eco hover:shadow-eco-lg;
+  }
+
+  .btn-secondary {
+    @apply px-6 py-3 bg-sky-blue text-white font-semibold rounded-lg hover:bg-ocean-blue transition-colors duration-200;
+  }
+
+  .card {
+    @apply bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-200;
+  }
+
+  .eco-badge {
+    @apply inline-flex items-center px-2 py-1 text-xs font-medium rounded-full bg-eco-mint text-forest-green;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-primary focus:border-transparent;
+  }
+}
+
+@layer utilities {
+  .gradient-eco {
+    @apply bg-gradient-to-r from-green-primary to-leaf-green;
+  }
+
+  .gradient-sky {
+    @apply bg-gradient-to-r from-sky-blue to-ocean-blue;
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r;
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+}

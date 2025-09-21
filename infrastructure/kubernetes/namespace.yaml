@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: meesho-ecosystem
+  labels:
+    name: meesho-ecosystem
+    environment: production

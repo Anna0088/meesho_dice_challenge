@@ -1,12 +1,15 @@
-# 🛍️ Meesho Ecosystem Reimagined
+# 🛍️ GreenBharat - Sustainable E-commerce Ecosystem (Meesho Reimagined)
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![Node.js](https://img.shields.io/badge/node-%3E%3D16.0.0-green.svg)
 ![TypeScript](https://img.shields.io/badge/typescript-%3E%3D4.9.0-blue.svg)
+![React](https://img.shields.io/badge/react-18.3-61DAFB.svg)
+![Vite](https://img.shields.io/badge/vite-7.1-646CFF.svg)
+![TailwindCSS](https://img.shields.io/badge/tailwind-3.4-38B2AC.svg)
 ![Docker](https://img.shields.io/badge/docker-%3E%3D20.10-blue.svg)
 ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)
 
-> A comprehensive microservices-based e-commerce ecosystem featuring AI-powered seller quality scoring, ML-driven review integrity, and gamified customer loyalty programs.
+> A comprehensive full-stack e-commerce ecosystem featuring a modern React frontend with sustainability theme, AI-powered seller quality scoring, ML-driven review integrity, and gamified customer loyalty programs.
 
 ## 📋 Table of Contents
 - [Overview](#overview)
@@ -14,6 +17,8 @@
 - [Key Features](#key-features)
 - [Tech Stack](#tech-stack)
 - [Getting Started](#getting-started)
+- [Frontend Setup](#frontend-setup)
+- [Backend Setup](#backend-setup)
 - [Project Structure](#project-structure)
 - [API Documentation](#api-documentation)
 - [Development](#development)
@@ -24,11 +29,14 @@
 
 ## 🎯 Overview
 
-The Meesho Ecosystem Reimagined is an enterprise-grade e-commerce platform that revolutionizes online marketplace operations through:
+GreenBharat is a sustainable, enterprise-grade e-commerce platform that revolutionizes online marketplace operations through:
+- **Sustainability Focus**: Green-themed UI promoting eco-friendly products and practices
+- **Modern Frontend**: React 18 with TypeScript, Vite, and Tailwind CSS for blazing-fast performance
 - **AI-Driven Quality Assurance**: Automated seller verification and quality scoring
 - **Trust & Safety**: ML-powered fake review detection and content moderation
 - **Customer Engagement**: Gamified loyalty program with rewards and achievements
 - **Real-time Analytics**: Comprehensive insights and predictive analytics
+- **Voice-Enabled**: Integrated voice assistant for accessibility
 
 ## 🏗️ Architecture
 
@@ -102,6 +110,15 @@ The Meesho Ecosystem Reimagined is an enterprise-grade e-commerce platform that 
 
 ## 🛠️ Tech Stack
 
+### Frontend
+- **Framework**: React 18.3 with TypeScript
+- **Build Tool**: Vite 7.1 for lightning-fast HMR
+- **Styling**: Tailwind CSS 3.4 with custom sustainability theme
+- **State Management**: React Hooks & Context API
+- **HTTP Client**: Axios for API communication
+- **Icons**: Lucide React for modern iconography
+- **Notifications**: React Hot Toast for user feedback
+
 ### Backend
 - **Runtime**: Node.js 16+ with TypeScript 4.9+
 - **Framework**: Express.js with middleware ecosystem
@@ -139,22 +156,64 @@ Ensure you have the following installed:
 - Docker Desktop (optional, for full infrastructure)
 - Git
 
-### Quick Start (Demo Mode)
+### Quick Start (Full Application)
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/meesho-ecosystem.git
-cd meesho-ecosystem
+git clone https://github.com/yourusername/greenbharat-ecosystem.git
+cd greenbharat-ecosystem
 
-# Install dependencies
+# Install backend dependencies
 npm install
 
-# Run the demo server (no Docker required)
+# Install frontend dependencies
+cd frontend
+npm install
+cd ..
+
+# Run both backend and frontend
+# Terminal 1 - Backend
 chmod +x run-local.sh
 ./run-local.sh
+# Backend available at http://localhost:3000
 
-# Server will be available at http://localhost:3000
+# Terminal 2 - Frontend
+cd frontend
+npm run dev
+# Frontend available at http://localhost:5173
 ```
+
+## 🎨 Frontend Setup
+
+### Development Mode
+```bash
+cd frontend
+npm install
+npm run dev
+# Visit http://localhost:5173
+```
+
+### Production Build
+```bash
+cd frontend
+npm run build
+npm run preview
+```
+
+### Frontend Features
+- 🌱 **Sustainability Theme**: Green-focused design with eco-friendly branding
+- 📱 **Responsive Design**: Mobile-first approach with Tailwind CSS
+- 🎨 **Custom Theme Colors**:
+  - Primary Green: `#10B981`
+  - Eco Mint: `#6EE7B7`
+  - Earth Tones: Brown, Beige, Orange
+  - Sky & Ocean Blues
+- 🔊 **Voice Assistant**: Integrated voice commands for accessibility
+- 📊 **Interactive Dashboards**: Real-time data visualization
+- 🛒 **Marketplace View**: Browse eco-friendly products
+- ⭐ **Rewards Center**: Track loyalty points and achievements
+
+## 🔧 Backend Setup
 
 ### Full Installation (with Docker)
 
@@ -200,31 +259,43 @@ npm start    # Production mode
 ## 📁 Project Structure
 
 ```
-meesho-ecosystem/
-├── services/               # Microservices
-│   ├── seller-service/     # Seller management & SQS
-│   ├── review-service/     # Review & moderation
-│   ├── loyalty-service/    # Gamification & rewards
-│   └── analytics-service/  # Analytics & reporting
-├── shared/                 # Shared utilities
-│   ├── config/            # Configuration management
-│   ├── integration/       # Service mesh & event bus
-│   ├── monitoring/        # Observability tools
-│   ├── optimization/      # Performance optimization
-│   ├── security/          # Rate limiting & auth
-│   └── synchronization/   # Data sync pipeline
-├── infrastructure/        # Infrastructure as Code
-│   ├── docker/           # Docker configurations
-│   └── kubernetes/       # K8s manifests
-├── tests/                # Testing suites
-│   ├── unit/            # Unit tests
-│   ├── integration/     # Integration tests
-│   └── load/           # Load testing framework
-├── docs/                # Documentation
-├── scripts/            # Utility scripts
+greenbharat-ecosystem/
+├── frontend/               # React Frontend Application
+│   ├── src/               # Source code
+│   │   ├── App.tsx        # Main application component
+│   │   ├── main.tsx       # Application entry point
+│   │   └── index.css      # Tailwind CSS imports
+│   ├── public/            # Static assets
+│   ├── index.html         # HTML template
+│   ├── vite.config.ts     # Vite configuration
+│   ├── tailwind.config.js # Tailwind CSS configuration
+│   ├── postcss.config.js  # PostCSS configuration
+│   ├── tsconfig.json      # TypeScript configuration
+│   └── package.json       # Frontend dependencies
+├── services/              # Backend Microservices
+│   ├── seller-service/    # Seller management & SQS
+│   ├── review-service/    # Review & moderation
+│   ├── loyalty-service/   # Gamification & rewards
+│   └── analytics-service/ # Analytics & reporting
+├── shared/                # Shared utilities
+│   ├── config/           # Configuration management
+│   ├── integration/      # Service mesh & event bus
+│   ├── monitoring/       # Observability tools
+│   ├── optimization/     # Performance optimization
+│   ├── security/         # Rate limiting & auth
+│   └── synchronization/  # Data sync pipeline
+├── infrastructure/       # Infrastructure as Code
+│   ├── docker/          # Docker configurations
+│   └── kubernetes/      # K8s manifests
+├── tests/               # Testing suites
+│   ├── unit/           # Unit tests
+│   ├── integration/    # Integration tests
+│   └── load/          # Load testing framework
+├── docs/               # Documentation
+├── demo-server.js      # Express demo backend
 ├── docker-compose.yml  # Local development setup
 ├── setup.sh           # Quick setup script
-└── run-local.sh      # Demo server launcher
+└── run-local.sh       # Backend server launcher
 ```
 
 ## 📚 API Documentation
@@ -357,55 +428,19 @@ JWT_SECRET=your-secret-key
 ENCRYPTION_KEY=your-encryption-key
 ```
 
-## 🤝 Contributing
+## 🌍 Sustainability Commitment
 
-We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
-
-### Development Workflow
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit changes (`git commit -m 'Add amazing feature'`)
-4. Push to branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-### Code Style
-- Follow TypeScript best practices
-- Use ESLint and Prettier configurations
-- Write comprehensive tests
-- Document new features
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- Inspired by modern e-commerce platforms
-- Built with open-source technologies
-- Community-driven development
-
-## 📞 Support
-
-- 📧 Email: support@example.com
-- 💬 Discord: [Join our community](https://discord.gg/example)
-- 📖 Documentation: [docs.example.com](https://docs.example.com)
-- 🐛 Issues: [GitHub Issues](https://github.com/yourusername/meesho-ecosystem/issues)
-
-## 📊 Project Status
-
-- ✅ Core microservices implemented
-- ✅ Event-driven architecture
-- ✅ ML-powered review detection
-- ✅ Gamification system
-- ✅ Real-time analytics
-- ✅ API rate limiting
-- ✅ Data synchronization
-- ✅ Load testing framework
-- 🔄 Kubernetes deployment (in progress)
-- 📝 Additional documentation (ongoing)
+GreenBharat is committed to promoting sustainable e-commerce:
+- 🌱 Carbon-neutral shipping options
+- ♻️ Eco-friendly packaging recommendations
+- 🏆 Rewards for choosing sustainable products
+- 📊 Environmental impact tracking
+- 🤝 Partnership with green vendors
 
 ---
 
 <p align="center">
-  Made with ❤️ by the Meesho Ecosystem Team
+  Made with ❤️ and 🌱 by the GreenBharat Team
+  <br/>
+  <em>Building a sustainable future, one transaction at a time</em>
 </p>
